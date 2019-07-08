@@ -15,4 +15,23 @@ RSpec.describe Url, type: :model do
     expect(subject.shortcode.size).to eq 6
     expect(subject.shortcode).to match(/\A[0-9a-zA-Z_]{6}\z/)
   end
+
+  describe '#process' do
+    before { subject.save! }
+
+    context 'when shortcode is found' do
+      it 'increment the url access for the given shortcode' do
+        described_class.process(subject.shortcode)
+        subject.reload
+
+        expect(subject.access).to eq(1)
+      end
+    end
+
+    context 'when shortcode not found' do
+      it 'should return nil' do
+        expect(described_class.process('asd')).to be nil
+      end
+    end
+  end
 end

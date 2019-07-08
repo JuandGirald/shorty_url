@@ -1,6 +1,9 @@
 class Url < ApplicationRecord
   validates :url, presence: true
   before_validation :check_protocol, :generate_shortcode, on: :create
+  validates :shortcode,
+            uniqueness: { case_sensitive: true,
+                          message: 'The the desired shortcode is already in use. Shortcodes are case-sensitive.' }
 
   scope :top, ->(limit) { order('access desc').limit(limit) }
 

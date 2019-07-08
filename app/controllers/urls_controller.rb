@@ -20,8 +20,7 @@ class UrlsController < ApplicationController
   end
 
   def redirect
-    url = Url.process(params[:id])
-    
+    url = Url.process(params[:shortcode]) 
     if url
       redirect_to url.url
     else

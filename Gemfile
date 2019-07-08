@@ -44,6 +44,9 @@ group :development, :test do
 
   gem 'capybara', '>= 2.15'
   gem 'rspec-rails', '~> 3.8'
+  # Use Factory Girl for generating random test data
+  gem 'factory_girl_rails'
+  gem 'faker'
 end
 
 group :development do
