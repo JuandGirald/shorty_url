@@ -1,6 +1,7 @@
 class Url < ApplicationRecord
-  validates :url, presence: true
   before_validation :check_protocol, :generate_shortcode, on: :create
+  after_create :set_url_title
+  validates :url, presence: true
   validates :shortcode,
             uniqueness: { case_sensitive: true,
                           message: 'The the desired shortcode is already in use. Shortcodes are case-sensitive.' }
@@ -14,6 +15,9 @@ class Url < ApplicationRecord
   end
 
   private
+    def set_url_title
+      SetUrlTitleWorker.perform_async(self.url)
+    end
     # generate a shortcode to match ^[0-9a-zA-Z_]{6}$
     def generate_shortcode
       unless shortcode

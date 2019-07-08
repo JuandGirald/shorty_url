@@ -8,9 +8,5 @@ FactoryGirl.define do
     trait :accessed do
       access { Faker::Number.between(1, 100) }
     end
-
-    trait :accessed_once do
-      access 1
-    end
   end
 end
