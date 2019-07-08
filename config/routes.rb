@@ -3,4 +3,6 @@ Rails.application.routes.draw do
   root 'urls#index'
 
   resources :urls, only: [:create, :show]
+  get '/:id', to: 'urls#redirect'
+  get '/url/not_found', to: 'urls#not_found'
 end

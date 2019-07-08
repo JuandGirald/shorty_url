@@ -1,11 +1,15 @@
 class Url < ApplicationRecord
-	validates_presence_of :url
-	before_validation :check_protocol, :generate_shortcode, on: :create
+  validates :url, presence: true
+  before_validation :check_protocol, :generate_shortcode, on: :create
 
+  scope :top, ->(limit) { order('access desc').limit(limit) }
 
+  def self.process(shortcode)
+    url = Url.find_by(shortcode: shortcode)
+  end
 
-	private
-		# generate a shortcode to match ^[0-9a-zA-Z_]{6}$
+  private
+    # generate a shortcode to match ^[0-9a-zA-Z_]{6}$
     def generate_shortcode
       unless shortcode
         begin 
@@ -20,8 +24,9 @@ class Url < ApplicationRecord
       end
     end
 
-		# check url protocol and add https if none
-	  def check_protocol
-	    self.url = "http://#{url}" unless URI.parse(url).scheme
-	  end
+    # check url protocol and add https if none
+    def check_protocol
+      return if url.blank?
+      self.url = "http://#{url}" unless URI.parse(url).scheme
+    end
 end

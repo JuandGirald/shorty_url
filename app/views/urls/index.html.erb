@@ -12,3 +12,25 @@
     <% end %>
   </div>
 </div>
+
+<div class="container text-center mt-5">
+  <h2>Top 100 most accessed URLs</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Url</th>
+        <th>Shorted url</th>
+        <th>Visit count</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%@urls.each do |url|%>
+        <tr>
+          <th> <%= url.url%></th>
+          <th> <%= request.base_url%>/<%= url.shortcode%> </th>
+          <td> <%= url.access %> </td>
+        </tr>
+      <%end%>
+    </tbody>
+  </table>
+</div>

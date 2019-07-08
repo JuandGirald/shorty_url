@@ -1,0 +1,8 @@
+<div class="row mt-5">
+	<div class="col-xs-8 col-xs-offset-2"> 
+		<p> Url: <%= @url.url %> </p>
+		<p> UrlShorter: <%= request.base_url%>/<%= @url.shortcode %> </p>
+		<p> Visits: <%= @url.access %> </p>
+		<%= link_to 'Go Back', root_path, class: 'btn btn-success new-url' %>
+	</div>
+</div>

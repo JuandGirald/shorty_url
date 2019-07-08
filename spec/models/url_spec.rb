@@ -1,13 +1,18 @@
 require 'rails_helper'
 
 RSpec.describe Url, type: :model do
-  let(:shorten) { Url.new(url: 'example.com') }
+  let(:subject) { Url.new(url: 'example.com') }
+
+  it 'is not valid without a url' do
+    subject.url = nil
+    expect(subject).to_not be_valid
+  end
   
   it 'should generate a shortcode with a valid url' do
-    shorten.save!
+    subject.save!
     
-    expect(shorten).to be_valid
-    expect(shorten.shortcode.size).to eq 6
-    expect(shorten.shortcode).to match(/\A[0-9a-zA-Z_]{6}\z/)
+    expect(subject).to be_valid
+    expect(subject.shortcode.size).to eq 6
+    expect(subject.shortcode).to match(/\A[0-9a-zA-Z_]{6}\z/)
   end
 end
