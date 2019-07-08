@@ -16,7 +16,7 @@ class Url < ApplicationRecord
 
   private
     def set_url_title
-      SetUrlTitleWorker.perform_async(self.url)
+      SetUrlTitleWorker.perform_async(self.id)
     end
     # generate a shortcode to match ^[0-9a-zA-Z_]{6}$
     def generate_shortcode
