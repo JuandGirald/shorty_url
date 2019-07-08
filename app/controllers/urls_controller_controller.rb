@@ -1,2 +1,0 @@
-class UrlsControllerController < ApplicationController
-end
