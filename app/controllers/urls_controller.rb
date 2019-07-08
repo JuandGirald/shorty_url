@@ -21,7 +21,12 @@ class UrlsController < ApplicationController
 
   def redirect
     url = Url.process(params[:id])
-    redirect_to url.url
+    
+    if url
+      redirect_to url.url
+    else
+      render 'not_found'
+    end
   end
 
   def not_found

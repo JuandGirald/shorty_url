@@ -5,7 +5,9 @@ class Url < ApplicationRecord
   scope :top, ->(limit) { order('access desc').limit(limit) }
 
   def self.process(shortcode)
-    url = Url.find_by(shortcode: shortcode)
+    return unless url = Url.find_by(shortcode: shortcode)
+
+    url.increment!(:access)
   end
 
   private
