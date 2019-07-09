@@ -46,7 +46,6 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.8'
   # Use Factory Girl for generating random test data
   gem 'factory_girl_rails'
-  gem 'faker'
 end
 
 group :development do
@@ -65,3 +64,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'nokogiri'
 gem 'httparty'
 gem 'sidekiq'
+gem 'faker'
+
