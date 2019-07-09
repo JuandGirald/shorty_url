@@ -1,24 +1,30 @@
-# README
+# Run Instructions
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Description
+Challenge accepted: Your mission, should you choose to accept it, is to make a URL shortener API.
 
-Things you may want to cover:
+1. Clone this repository:
 
-* Ruby version
+2. Run the following commands
+```
+bundle install
+rake db:migrate db:setup db:seed
+rails server
+```
 
-* System dependencies
+We use sidekit for background jobs to scrapp the title from each url, in order to work, you must install redis and start it with sidekiq:
+```
+brew install redis
+redis-server
+bundle exec sidekiq
+```
 
-* Configuration
+## How it works?
 
-* Database creation
+Generate shortened urls and have a top 100 board with the most frequent accessed urls. After The Shorter is created a backgroundJob service is executed async that extracts the title from the url page and saved in to the database. 
 
-* Database initialization
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## How to run specs
+```
+rspec
+```

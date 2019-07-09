@@ -7,9 +7,9 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 require 'faker'
 
-200.times do
+200.times do |index|
   Url.create(
-  	url: Faker::Internet.url,
+  	url: "https://es.wikipedia.org/wiki/#{index}",
   	access: Faker::Number.between(1, 50)
   )
 end
